@@ -3,7 +3,7 @@ Repository for the article "Machine Learning for Go/No-Go Screening of Acute Der
 
 <div align="center">
   <img src="Supporting Information/Graphical.png" 
-       alt="Screenshot" width="633" height="672">
+       alt="Screenshot" width="633" height="272">
 </div>
 
 
