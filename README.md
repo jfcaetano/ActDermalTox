@@ -6,6 +6,3 @@ Repository for the article "Machine Learning for Go/No-Go Screening of Acute Der
        alt="Screenshot" width="633" height="672">
 </div>
 
-<div align="center">
-  <h2>⚙️ <a href="http://autovap.jfcaetano.com/"> Online Interface Link</a></h2>
-</div>
