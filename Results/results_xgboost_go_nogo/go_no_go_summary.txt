@@ -1,0 +1,18 @@
+
+GO / NO-GO DECISION SUMMARY
+
+Interpretation:
+- GO = predicted non-toxic
+- NO-GO = predicted toxic
+
+Test-set results:
+- True GO (non-toxic correctly allowed): 406
+- False NO-GO (non-toxic incorrectly blocked): 41
+- False GO (toxic incorrectly allowed): 32
+- True NO-GO (toxic correctly blocked): 71
+
+Key screening interpretation:
+- Fraction of toxic compounds stopped (NO-GO recall): 0.689
+- Fraction of non-toxic compounds allowed (GO recall): 0.908
+- Reliability of NO-GO decisions (NO-GO precision): 0.634
+- Reliability of GO decisions (GO precision): 0.927
