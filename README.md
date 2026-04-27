@@ -6,6 +6,10 @@ Repository for the article "Machine Learning for Go/No-Go Screening of Acute Der
        alt="Screenshot" width="633" height="672">
 </div>
 
+
+## Orinigal Source Dataset
+The original dataset used in this model is derived from Koutroumpa, N.-M. (2025). Dataset ds13 - Acute dermal toxicity of small molecules. NovaMechanics. https://db.chempharos.eu/datasets/Datasets.zul?datasetID=ds13
+
 ## Scripts
 Execute in Google Collab in the folliwng order:
 
