@@ -1,0 +1,44 @@
+Timestamp_UTC,Run_Mode,Stage,Status,Message
+2026-07-23T14:02:41.654982+00:00,development,workflow,started,RUN_MODE=development
+2026-07-23T14:02:41.688822+00:00,development,software_versions,saved,"{""python"": ""3.12.13"", ""numpy"": ""2.0.2"", ""pandas"": ""2.2.2"", ""scikit_learn"": ""1.6.1"", ""imbalanced_learn"": ""0.14.2"", ""xgboost"": ""3.3.0"", ""rdkit"": ""2026.03.4"", ""shap"": ""0.52.0""}"
+2026-07-23T14:02:58.824723+00:00,development,scaffold_split_search,started,candidates=500
+2026-07-23T14:02:59.770786+00:00,development,development_mode,started,
+2026-07-23T14:03:00.135583+00:00,development,chunk1_algorithm_comparison,started,5 algorithms; 5 folds
+2026-07-23T14:04:17.973751+00:00,development,chunk1_algorithm_comparison,completed,selected_algorithm=XGBoost
+2026-07-23T14:04:18.440850+00:00,development,chunk2_xgboost_tuning,started,30 candidates; 5 folds
+2026-07-23T14:10:09.148049+00:00,development,chunk2_xgboost_tuning,completed,best_mean_pr_auc=0.509504
+2026-07-23T14:10:09.152946+00:00,development,feature_selection,started,candidate_features=110
+2026-07-23T14:10:14.502343+00:00,development,feature_selection,completed,selected_features=60
+2026-07-23T14:10:14.508030+00:00,development,vif_assessment,started,features=60
+2026-07-23T14:10:15.176425+00:00,development,vif_assessment,completed,warning_or_higher=50; severe_or_higher=42
+2026-07-23T14:10:15.534385+00:00,development,weighted_oof_predictions,started,folds=5
+2026-07-23T14:10:31.116428+00:00,development,weighted_oof_predictions,completed,threshold=0.56; PR_AUC=0.617836; Recall=0.550505; F1=0.573684
+2026-07-23T14:10:31.445912+00:00,development,imbalance_oof_comparison,started,"methods=['scale_pos_weight', 'SMOTE', 'ADASYN']; folds=5; threshold=0.5599999999999998"
+2026-07-23T14:11:12.529680+00:00,development,imbalance_oof_comparison,completed,weighted_recall=0.550505; weighted_f1=0.573684; weighted_pr_auc=0.617836; smote_recall=0.477273; smote_f1=0.541547; smote_pr_auc=0.607454; adasyn_recall=0.477273; adasyn_f1=0.537696; adasyn_pr_auc=0.596493
+2026-07-23T14:11:12.547992+00:00,development,freeze_configuration,completed,/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/frozen_model_configuration.json
+2026-07-23T14:11:12.567211+00:00,development,development_mode,completed,
+2026-07-23T14:11:12.571975+00:00,development,workflow,completed,RUN_MODE=development
+2026-07-23T23:22:18.382653+00:00,development,workflow,started,RUN_MODE=development
+2026-07-23T23:22:20.029469+00:00,development,software_versions,saved,"{""python"": ""3.12.13"", ""numpy"": ""2.0.2"", ""pandas"": ""2.2.2"", ""scikit_learn"": ""1.6.1"", ""imbalanced_learn"": ""0.14.2"", ""xgboost"": ""3.3.0"", ""rdkit"": ""2026.03.4"", ""shap"": ""0.52.0""}"
+2026-07-23T23:22:21.784079+00:00,development,development_mode,started,
+2026-07-23T23:22:22.217060+00:00,development,chunk1_algorithm_comparison,started,5 algorithms; 5 folds
+2026-07-23T23:24:16.942819+00:00,development,chunk1_algorithm_comparison,completed,selected_algorithm=GradientBoosting
+2026-07-23T23:24:16.948605+00:00,development,workflow,failed,"RuntimeError: XGBoost was not the highest-performing algorithm under the expanded classical-QSAR and tree-model comparison. The remaining workflow is XGBoost-specific, so automatic continuation has been stopped. Review Chunk 1 before deciding whether to revise the final model family."
+2026-07-23T23:29:44.517291+00:00,development,workflow,started,RUN_MODE=development
+2026-07-23T23:29:44.575969+00:00,development,software_versions,saved,"{""python"": ""3.12.13"", ""numpy"": ""2.0.2"", ""pandas"": ""2.2.2"", ""scikit_learn"": ""1.6.1"", ""imbalanced_learn"": ""0.14.2"", ""xgboost"": ""3.3.0"", ""rdkit"": ""2026.03.4"", ""shap"": ""0.52.0""}"
+2026-07-23T23:29:44.826515+00:00,development,development_mode,started,
+2026-07-23T23:29:45.634874+00:00,development,chunk1_algorithm_comparison,started,5 algorithms; 5 folds
+2026-07-23T23:30:45.390470+00:00,development,chunk1_algorithm_comparison,completed,selected_algorithm=XGBoost
+2026-07-23T23:30:46.020311+00:00,development,chunk2_xgboost_tuning,started,30 candidates; 5 folds
+2026-07-23T23:40:14.038421+00:00,development,chunk2_xgboost_tuning,completed,best_mean_pr_auc=0.509504
+2026-07-23T23:40:14.044120+00:00,development,feature_selection,started,candidate_features=110
+2026-07-23T23:40:25.561386+00:00,development,feature_selection,completed,selected_features=60
+2026-07-23T23:40:25.569144+00:00,development,vif_assessment,started,features=60
+2026-07-23T23:40:27.121886+00:00,development,vif_assessment,completed,warning_or_higher=50; severe_or_higher=42
+2026-07-23T23:40:28.334127+00:00,development,weighted_oof_predictions,started,folds=5
+2026-07-23T23:40:55.741792+00:00,development,weighted_oof_predictions,completed,threshold=0.56; PR_AUC=0.617836; Recall=0.550505; F1=0.573684
+2026-07-23T23:40:56.205039+00:00,development,imbalance_oof_comparison,started,"methods=['scale_pos_weight', 'SMOTE', 'ADASYN']; folds=5; threshold=0.5599999999999998"
+2026-07-23T23:42:03.281986+00:00,development,imbalance_oof_comparison,completed,weighted_recall=0.550505; weighted_f1=0.573684; weighted_pr_auc=0.617836; smote_recall=0.477273; smote_f1=0.541547; smote_pr_auc=0.607454; adasyn_recall=0.477273; adasyn_f1=0.537696; adasyn_pr_auc=0.596493
+2026-07-23T23:42:03.976129+00:00,development,freeze_configuration,completed,/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/frozen_model_configuration.json
+2026-07-23T23:42:03.980115+00:00,development,development_mode,completed,
+2026-07-23T23:42:03.987589+00:00,development,workflow,completed,RUN_MODE=development
