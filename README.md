@@ -14,14 +14,44 @@ Koutroumpa, N.M. (2025). Dataset ds13 - Acute dermal toxicity of small molecules
 ## Scripts
 Execute in Google Collab in the folliwng order:
 
-### 1 Model_Algorithm_Screening.py
-Google Colab initial workflow comparing Random Forest, Gradient Boosting, and XGBoost toxicity models using RDKit descriptors, hyperparameter tuning, threshold optimization, and final test-set ranking.
+# Scaffold-Locked QSAR Toxicity Workflow
 
-### 2 Model_XGB_Screening.py
-Google Colab XGBoost workflow for toxicity screening, with improved tuning, validation, feature selection, applicability-domain correction, and threshold optimization.
+An end-to-end Google Colab workflow for building and validating binary toxicity classification models from molecular structures.
 
-### 3 Main_Model_Dermal.py
-Google Colab XGBoost model for toxicity screening, classifying compounds as GO/non-toxic or NO-GO/toxic using RDKit descriptors, cross-validation, applicability-domain analysis, and saved performance outputs.
+The pipeline predicts:
 
-### 4 Main_Model_Dermal_SHAP.py
-Google Colab XGBoost toxicity model with GO/NO-GO prediction, top-feature selection, and SHAP analysis to explain the most influential molecular descriptors.
+* **GO (0):** predicted non-toxic
+* **NO-GO (1):** predicted toxic
+
+## What the Workflow Does
+
+* Cleans, canonicalizes, and deduplicates molecular structures.
+* Calculates physicochemical descriptors using RDKit.
+* Creates a **scaffold-separated locked test set** to reduce structural data leakage.
+* Compares Logistic Regression, SVM, Random Forest, Gradient Boosting, and XGBoost using identical scaffold-grouped cross-validation folds.
+* Tunes XGBoost using development data only.
+* Selects and freezes the 60 most important molecular descriptors.
+* Calculates Variance Inflation Factors to assess descriptor multicollinearity.
+* Selects a fixed classification threshold from out-of-fold predictions.
+* Compares three class-imbalance strategies:
+
+  * `scale_pos_weight`
+  * SMOTE
+  * ADASYN
+* Evaluates the frozen models once on the locked scaffold test set.
+* Calculates an applicability domain using nearest-neighbour distances.
+* Generates SHAP explanations for global and compound-level model interpretation.
+* Saves models, predictions, metrics, plots, configurations, software versions, and execution logs.
+
+## Two-Stage Execution
+
+### `development`
+
+Performs model comparison, tuning, feature selection, VIF analysis, threshold selection, and development-only imbalance comparisons. The locked test set remains untouched.
+
+### `final_test`
+
+Loads the frozen development configuration, trains the final weighted, SMOTE, and ADASYN models, and evaluates the locked test set once. It also produces applicability-domain and SHAP analyses.
+
+> Run `development` first, archive the frozen outputs, then change only `RUN_MODE` to `final_test`. Do not retune the model after inspecting the locked-test results.
+
