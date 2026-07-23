@@ -1,0 +1,284 @@
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: final_test
+Started (UTC): 2026-07-23T14:12:08.063219+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T14:12:14.510260+00:00
+========================================================================
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: final_test
+Started (UTC): 2026-07-23T14:14:14.453341+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+Locked-test class-imbalance comparison:
+             Method  Recall_toxic  F1_toxic    PR_AUC  Precision_toxic  \
+0  scale_pos_weight      0.574468  0.580645  0.656821         0.586957   
+1             SMOTE      0.489362  0.538012  0.644025         0.597403   
+2            ADASYN      0.531915  0.588235  0.649028         0.657895   
+
+   BalancedAccuracy       MCC   ROC_AUC  Accuracy  Threshold  
+0          0.743656  0.491455  0.881954  0.852830       0.56  
+1          0.709130  0.453377  0.879172  0.850943       0.56  
+2          0.736141  0.514723  0.876513  0.867925       0.56  
+
+CHUNK 3: Locked scaffold-test results for the original weighted model
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0   0.85283          0.743656         0.586957      0.574468   
+
+   Specificity_non_toxic  F1_toxic       MCC    Brier   ROC_AUC    PR_AUC  \
+0               0.912844  0.580645  0.491455  0.10623  0.881954  0.656821   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0      398           38        40          54      0.908676   0.912844   
+
+   NO_GO_Precision  NO_GO_Recall  Threshold  
+0         0.586957      0.574468       0.56  
+
+Confusion matrix:
+              Predicted_GO  Predicted_NO_GO
+Actual_GO              398               38
+Actual_NO_GO            40               54
+
+CHUNK 4A: Applicability domain
+AD cutoff: 5.8807
+Inside AD: 488 / 530
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0  0.842213          0.737855         0.577778      0.571429   
+1  0.976190          0.833333         1.000000      0.666667   
+
+   Specificity_non_toxic  F1_toxic       MCC     Brier   ROC_AUC    PR_AUC  \
+0               0.904282  0.574586  0.477745  0.112761  0.874526  0.656293   
+1               1.000000  0.800000  0.806226  0.030340  0.991453  0.916667   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0      359           38        39          52       0.90201   0.904282   
+1       39            0         1           2       0.97500   1.000000   
+
+   NO_GO_Precision  NO_GO_Recall      Subset    N  
+0         0.577778      0.571429   Inside_AD  488  
+1         1.000000      0.666667  Outside_AD   42  
+
+CHUNK 4B: Top SHAP features
+                Feature  Mean_Absolute_SHAP         VIF  \
+0                 Chi2n            0.361792  404.310298   
+1           VSA_EState2            0.316544    5.628466   
+2              SMR_VSA6            0.206687   23.566184   
+3              SMR_VSA1            0.205722   60.247604   
+4        MinEStateIndex            0.188912    5.804830   
+5              SMR_VSA5            0.176518  112.612812   
+6            NumHDonors            0.168961   50.229208   
+7           EState_VSA1            0.156926   11.321911   
+8   MinAbsPartialCharge            0.153167  145.282993   
+9         HallKierAlpha            0.135189  217.508695   
+10                Chi2v            0.130824  125.539091   
+11              MolLogP            0.123481   57.815831   
+12                Chi4n            0.118789  111.955594   
+13                 TPSA            0.110777  411.992884   
+14               Kappa3            0.108023    1.031297   
+15           PEOE_VSA10            0.107015    3.727974   
+16     MinPartialCharge            0.103301  114.849423   
+17          VSA_EState9            0.100713    6.857680   
+18             SMR_VSA9            0.099733    4.572677   
+19          EState_VSA9            0.084826   25.711478   
+
+                     VIF_Status  
+0      Severe multicollinearity  
+1   Potential multicollinearity  
+2      Severe multicollinearity  
+3      Severe multicollinearity  
+4   Potential multicollinearity  
+5      Severe multicollinearity  
+6      Severe multicollinearity  
+7      Severe multicollinearity  
+8      Severe multicollinearity  
+9      Severe multicollinearity  
+10     Severe multicollinearity  
+11     Severe multicollinearity  
+12     Severe multicollinearity  
+13     Severe multicollinearity  
+14                   Acceptable  
+15                   Acceptable  
+16     Severe multicollinearity  
+17  Potential multicollinearity  
+18                   Acceptable  
+19     Severe multicollinearity  
+
+FINAL TEST COMPLETE.
+Do not use these results for further hyperparameter, feature, or threshold tuning.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T14:14:42.161790+00:00
+========================================================================
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: final_test
+Started (UTC): 2026-07-23T23:42:55.794844+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+WORKFLOW FAILED
+Traceback (most recent call last):
+  File "/tmp/ipykernel_417/3622558960.py", line 4315, in <cell line: 0>
+    run_final_test(
+  File "/tmp/ipykernel_417/3622558960.py", line 3335, in run_final_test
+    raise RuntimeError(
+RuntimeError: The locked test has already been evaluated. Set ALLOW_REPEAT_FINAL_TEST to True only for exact reproducibility checks, never for further model tuning.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T23:42:57.649831+00:00
+========================================================================
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: final_test
+Started (UTC): 2026-07-23T23:44:25.926007+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+Locked-test class-imbalance comparison:
+             Method  Recall_toxic  F1_toxic    PR_AUC  Precision_toxic  \
+0  scale_pos_weight      0.574468  0.580645  0.656821         0.586957   
+1             SMOTE      0.489362  0.538012  0.644025         0.597403   
+2            ADASYN      0.531915  0.588235  0.649028         0.657895   
+
+   BalancedAccuracy       MCC   ROC_AUC  Accuracy  Threshold  
+0          0.743656  0.491455  0.881954  0.852830       0.56  
+1          0.709130  0.453377  0.879172  0.850943       0.56  
+2          0.736141  0.514723  0.876513  0.867925       0.56  
+
+CHUNK 3: Locked scaffold-test results for the original weighted model
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0   0.85283          0.743656         0.586957      0.574468   
+
+   Specificity_non_toxic  F1_toxic       MCC    Brier   ROC_AUC    PR_AUC  \
+0               0.912844  0.580645  0.491455  0.10623  0.881954  0.656821   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0      398           38        40          54      0.908676   0.912844   
+
+   NO_GO_Precision  NO_GO_Recall  Threshold  
+0         0.586957      0.574468       0.56  
+
+Confusion matrix:
+              Predicted_GO  Predicted_NO_GO
+Actual_GO              398               38
+Actual_NO_GO            40               54
+
+CHUNK 4A: Applicability domain
+AD cutoff: 5.8807
+Inside AD: 488 / 530
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0  0.842213          0.737855         0.577778      0.571429   
+1  0.976190          0.833333         1.000000      0.666667   
+
+   Specificity_non_toxic  F1_toxic       MCC     Brier   ROC_AUC    PR_AUC  \
+0               0.904282  0.574586  0.477745  0.112761  0.874526  0.656293   
+1               1.000000  0.800000  0.806226  0.030340  0.991453  0.916667   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0      359           38        39          52       0.90201   0.904282   
+1       39            0         1           2       0.97500   1.000000   
+
+   NO_GO_Precision  NO_GO_Recall      Subset    N  
+0         0.577778      0.571429   Inside_AD  488  
+1         1.000000      0.666667  Outside_AD   42  
+
+CHUNK 4B: Top SHAP features
+                Feature  Mean_Absolute_SHAP         VIF  \
+0                 Chi2n            0.361792  404.310298   
+1           VSA_EState2            0.316544    5.628466   
+2              SMR_VSA6            0.206687   23.566184   
+3              SMR_VSA1            0.205722   60.247604   
+4        MinEStateIndex            0.188912    5.804830   
+5              SMR_VSA5            0.176518  112.612812   
+6            NumHDonors            0.168961   50.229208   
+7           EState_VSA1            0.156926   11.321911   
+8   MinAbsPartialCharge            0.153167  145.282993   
+9         HallKierAlpha            0.135189  217.508695   
+10                Chi2v            0.130824  125.539091   
+11              MolLogP            0.123481   57.815831   
+12                Chi4n            0.118789  111.955594   
+13                 TPSA            0.110777  411.992884   
+14               Kappa3            0.108023    1.031297   
+15           PEOE_VSA10            0.107015    3.727974   
+16     MinPartialCharge            0.103301  114.849423   
+17          VSA_EState9            0.100713    6.857680   
+18             SMR_VSA9            0.099733    4.572677   
+19          EState_VSA9            0.084826   25.711478   
+
+                     VIF_Status  
+0      Severe multicollinearity  
+1   Potential multicollinearity  
+2      Severe multicollinearity  
+3      Severe multicollinearity  
+4   Potential multicollinearity  
+5      Severe multicollinearity  
+6      Severe multicollinearity  
+7      Severe multicollinearity  
+8      Severe multicollinearity  
+9      Severe multicollinearity  
+10     Severe multicollinearity  
+11     Severe multicollinearity  
+12     Severe multicollinearity  
+13     Severe multicollinearity  
+14                   Acceptable  
+15                   Acceptable  
+16     Severe multicollinearity  
+17  Potential multicollinearity  
+18                   Acceptable  
+19     Severe multicollinearity  
+
+FINAL TEST COMPLETE.
+Do not use these results for further hyperparameter, feature, or threshold tuning.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_final_test.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_final_test.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T23:45:14.161459+00:00
+========================================================================

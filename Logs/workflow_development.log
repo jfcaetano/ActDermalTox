@@ -1,0 +1,404 @@
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: development
+Started (UTC): 2026-07-23T14:02:41.654031+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded raw dataset shape: (2750, 1012)
+
+Canonicalizing structures ...
+
+Calculating RDKit descriptors ...
+
+Cleaned dataset shape: (2698, 119)
+Cleaned class counts:
+Label
+0    2208
+1     490
+Name: count, dtype: int64
+Unique scaffolds: 1689
+Removed rows: 52
+
+Searching candidate scaffold splits ...
+
+Created and locked scaffold split.
+Partition
+development    2168
+locked_test     530
+Name: count, dtype: int64
+
+Class counts by partition:
+Label           0    1
+Partition             
+development  1772  396
+locked_test   436   94
+
+CHUNK 1: Comparing classical QSAR and tree-based algorithms using identical scaffold-grouped CV folds ...
+LogisticRegression: mean PR-AUC = 0.519016 ± 0.068542; OOF F1 = 0.499040; OOF MCC = 0.370643
+SVM: mean PR-AUC = 0.567065 ± 0.065283; OOF F1 = 0.448980; OOF MCC = 0.407280
+RandomForest: mean PR-AUC = 0.606647 ± 0.039375; OOF F1 = 0.411111; OOF MCC = 0.406035
+GradientBoosting: mean PR-AUC = 0.612895 ± 0.052741; OOF F1 = 0.544820; OOF MCC = 0.435276
+XGBoost: mean PR-AUC = 0.629978 ± 0.050095; OOF F1 = 0.566298; OOF MCC = 0.483356
+
+Chunk 1 full-metric summary:
+            Algorithm  Mean_CV_PR_AUC  Std_CV_PR_AUC  OOF_ROC_AUC  OOF_PR_AUC  \
+0             XGBoost        0.629978       0.050095     0.830946    0.610136   
+1    GradientBoosting        0.612895       0.052741     0.832253    0.592968   
+2        RandomForest        0.606647       0.039375     0.828328    0.592408   
+3                 SVM        0.567065       0.065283     0.810155    0.545379   
+4  LogisticRegression        0.519016       0.068542     0.794464    0.490486   
+
+   OOF_Accuracy  OOF_BalancedAccuracy  OOF_Precision_toxic  OOF_Recall_toxic  \
+0      0.855166              0.724132             0.625000          0.517677   
+1      0.819649              0.730838             0.505400          0.590909   
+2      0.853321              0.630840             0.770833          0.280303   
+3      0.850554              0.649737             0.687500          0.333333   
+4      0.759225              0.719366             0.402477          0.656566   
+
+   OOF_Specificity_non_toxic  OOF_F1_toxic   OOF_MCC  OOF_Brier  
+0                   0.930587      0.566298  0.483356   0.109916  
+1                   0.870767      0.544820  0.435276   0.125999  
+2                   0.981377      0.411111  0.406035   0.109202  
+3                   0.966140      0.448980  0.407280   0.112066  
+4                   0.782167      0.499040  0.370643   0.164969  
+
+Selected algorithm family by mean CV PR-AUC: XGBoost
+
+CHUNK 2: Tuning XGBoost using development-only scaffold-grouped CV ...
+
+Selected XGBoost parameters:
+{
+  "subsample": 0.8,
+  "reg_lambda": 2.0,
+  "reg_alpha": 0.5,
+  "n_estimators": 700,
+  "min_child_weight": 4,
+  "max_depth": 6,
+  "learning_rate": 0.01,
+  "gamma": 0.3,
+  "colsample_bytree": 1.0
+}
+Best mean scaffold-CV average precision: 0.509504
+
+Selecting and freezing top descriptors ...
+
+Frozen descriptor count: 60
+
+MULTICOLLINEARITY ASSESSMENT
+VIF was calculated on the frozen development descriptors after median imputation and scaling.
+Features with VIF >= 5.0:  50
+Features with VIF >= 10.0:  42
+Infinite VIF values: 0
+                Feature  R_squared            VIF                VIF_Status  \
+0                 MolWt   0.999997  388232.669702  Severe multicollinearity   
+1        HeavyAtomMolWt   0.999997  322448.297170  Severe multicollinearity   
+2        HeavyAtomCount   0.999988   84447.611141  Severe multicollinearity   
+3                  Chi1   0.999960   25294.745462  Severe multicollinearity   
+4   NumValenceElectrons   0.999960   24951.272630  Severe multicollinearity   
+5                  Chi0   0.999959   24504.541370  Severe multicollinearity   
+6                 Chi0v   0.999776    4467.041185  Severe multicollinearity   
+7                Kappa1   0.999754    4067.670993  Severe multicollinearity   
+8               NOCount   0.998602     715.123743  Severe multicollinearity   
+9        NumHeteroatoms   0.998246     570.012262  Severe multicollinearity   
+10                Chi1v   0.998167     545.694057  Severe multicollinearity   
+11                 TPSA   0.997573     411.992884  Severe multicollinearity   
+12                Chi2n   0.997527     404.310298  Severe multicollinearity   
+13                Chi3n   0.995542     224.334746  Severe multicollinearity   
+14        HallKierAlpha   0.995402     217.508695  Severe multicollinearity   
+15     MaxPartialCharge   0.994851     194.196228  Severe multicollinearity   
+16  MinAbsPartialCharge   0.993117     145.282993  Severe multicollinearity   
+17  MaxAbsPartialCharge   0.992585     134.860492  Severe multicollinearity   
+18                Chi2v   0.992034     125.539091  Severe multicollinearity   
+19     MinPartialCharge   0.991293     114.849423  Severe multicollinearity   
+
+    Development_N  Auxiliary_Predictor_Count  
+0            2168                         59  
+1            2168                         59  
+2            2168                         59  
+3            2168                         59  
+4            2168                         59  
+5            2168                         59  
+6            2168                         59  
+7            2168                         59  
+8            2168                         59  
+9            2168                         59  
+10           2168                         59  
+11           2168                         59  
+12           2168                         59  
+13           2168                         59  
+14           2168                         59  
+15           2168                         59  
+16           2168                         59  
+17           2168                         59  
+18           2168                         59  
+19           2168                         59  
+
+Generating weighted XGBoost development OOF predictions ...
+
+Frozen threshold: 0.56
+Development OOF performance:
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0  0.850554          0.734056         0.598901      0.550505   
+
+   Specificity_non_toxic  F1_toxic       MCC     Brier   ROC_AUC    PR_AUC  \
+0               0.917607  0.573684  0.483905  0.113891  0.842545  0.617836   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0     1626          146       178         218       0.90133   0.917607   
+
+   NO_GO_Precision  NO_GO_Recall  
+0         0.598901      0.550505  
+
+Comparing scale_pos_weight, SMOTE, and ADASYN using scaffold-grouped OOF predictions ...
+
+Development OOF imbalance comparison:
+             Method  Recall_toxic  F1_toxic    PR_AUC  Precision_toxic  \
+0  scale_pos_weight      0.550505  0.573684  0.617836         0.598901   
+1             SMOTE      0.477273  0.541547  0.607454         0.625828   
+2            ADASYN      0.477273  0.537696  0.596493         0.615635   
+
+   BalancedAccuracy       MCC   ROC_AUC  Accuracy  Threshold  
+0          0.734056  0.483905  0.842545  0.850554       0.56  
+1          0.706751  0.461423  0.842522  0.852399       0.56  
+2          0.705341  0.455137  0.842435  0.850092       0.56  
+
+Frozen configuration saved to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/frozen_model_configuration.json
+
+DEVELOPMENT COMPLETE.
+The locked scaffold test was not evaluated.
+Archive the output directory.
+Then change only RUN_MODE to 'final_test' and rerun.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T14:11:12.576817+00:00
+========================================================================
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: development
+Started (UTC): 2026-07-23T23:22:18.381042+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+CHUNK 1: Comparing classical QSAR and tree-based algorithms using identical scaffold-grouped CV folds ...
+LogisticRegression: mean PR-AUC = 0.519025 ± 0.068547; OOF F1 = 0.499040; OOF MCC = 0.370643
+SVM: mean PR-AUC = 0.567065 ± 0.065283; OOF F1 = 0.448980; OOF MCC = 0.407280
+RandomForest: mean PR-AUC = 0.606647 ± 0.039375; OOF F1 = 0.411111; OOF MCC = 0.406035
+GradientBoosting: mean PR-AUC = 0.612895 ± 0.052741; OOF F1 = 0.544820; OOF MCC = 0.435276
+XGBoost: mean PR-AUC = 0.612878 ± 0.049073; OOF F1 = 0.549419; OOF MCC = 0.474392
+
+Chunk 1 full-metric summary:
+            Algorithm  Mean_CV_PR_AUC  Std_CV_PR_AUC  OOF_ROC_AUC  OOF_PR_AUC  \
+0    GradientBoosting        0.612895       0.052741     0.832253    0.592968   
+1             XGBoost        0.612878       0.049073     0.825561    0.593812   
+2        RandomForest        0.606647       0.039375     0.828328    0.592408   
+3                 SVM        0.567065       0.065283     0.810155    0.545379   
+4  LogisticRegression        0.519025       0.068547     0.794473    0.490508   
+
+   OOF_Accuracy  OOF_BalancedAccuracy  OOF_Precision_toxic  OOF_Recall_toxic  \
+0      0.819649              0.730838             0.505400          0.590909   
+1      0.857011              0.709573             0.647260          0.477273   
+2      0.853321              0.630840             0.770833          0.280303   
+3      0.850554              0.649737             0.687500          0.333333   
+4      0.759225              0.719366             0.402477          0.656566   
+
+   OOF_Specificity_non_toxic  OOF_F1_toxic   OOF_MCC  OOF_Brier  
+0                   0.870767      0.544820  0.435276   0.125999  
+1                   0.941874      0.549419  0.474392   0.117272  
+2                   0.981377      0.411111  0.406035   0.109202  
+3                   0.966140      0.448980  0.407280   0.112066  
+4                   0.782167      0.499040  0.370643   0.164969  
+
+Selected algorithm family by mean CV PR-AUC: GradientBoosting
+
+WORKFLOW FAILED
+Traceback (most recent call last):
+  File "/tmp/ipykernel_417/3216147099.py", line 4323, in <cell line: 0>
+    run_development(
+  File "/tmp/ipykernel_417/3216147099.py", line 3209, in run_development
+    compare_algorithms(
+  File "/tmp/ipykernel_417/3216147099.py", line 1799, in compare_algorithms
+    raise RuntimeError(
+RuntimeError: XGBoost was not the highest-performing algorithm under the expanded classical-QSAR and tree-model comparison. The remaining workflow is XGBoost-specific, so automatic continuation has been stopped. Review Chunk 1 before deciding whether to revise the final model family.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T23:24:16.964135+00:00
+========================================================================
+
+========================================================================
+SCAFFOLD-LOCKED TOXICITY WORKFLOW
+Run mode: development
+Started (UTC): 2026-07-23T23:29:44.513934+00:00
+Console log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured event log: /content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+========================================================================
+Number of initially selected RDKit descriptors: 112
+Loaded existing cleaned dataset: (2698, 119)
+Loaded existing locked scaffold split.
+
+CHUNK 1: Comparing classical QSAR and tree-based algorithms using identical scaffold-grouped CV folds ...
+LogisticRegression: mean PR-AUC = 0.519259 ± 0.068333; OOF F1 = 0.497598; OOF MCC = 0.368674
+SVM: mean PR-AUC = 0.567065 ± 0.065283; OOF F1 = 0.448980; OOF MCC = 0.407280
+RandomForest: mean PR-AUC = 0.596069 ± 0.052406; OOF F1 = 0.410256; OOF MCC = 0.397971
+GradientBoosting: mean PR-AUC = 0.608619 ± 0.048819; OOF F1 = 0.546893; OOF MCC = 0.436098
+XGBoost: mean PR-AUC = 0.612878 ± 0.049073; OOF F1 = 0.549419; OOF MCC = 0.474392
+
+Chunk 1 full-metric summary:
+            Algorithm  Mean_CV_PR_AUC  Std_CV_PR_AUC  OOF_ROC_AUC  OOF_PR_AUC  \
+0             XGBoost        0.612878       0.049073     0.825561    0.593812   
+1    GradientBoosting        0.608619       0.048819     0.827622    0.588754   
+2        RandomForest        0.596069       0.052406     0.826981    0.581158   
+3                 SVM        0.567065       0.065283     0.810155    0.545379   
+4  LogisticRegression        0.519259       0.068333     0.794507    0.490570   
+
+   OOF_Accuracy  OOF_BalancedAccuracy  OOF_Precision_toxic  OOF_Recall_toxic  \
+0      0.857011              0.709573             0.647260          0.477273   
+1      0.815037              0.735860             0.494888          0.611111   
+2      0.851476              0.630692             0.746667          0.282828   
+3      0.850554              0.649737             0.687500          0.333333   
+4      0.758764              0.718104             0.401550          0.654040   
+
+   OOF_Specificity_non_toxic  OOF_F1_toxic   OOF_MCC  OOF_Brier  
+0                   0.941874      0.549419  0.474392   0.117272  
+1                   0.860609      0.546893  0.436098   0.129999  
+2                   0.978555      0.410256  0.397971   0.110053  
+3                   0.966140      0.448980  0.407280   0.112066  
+4                   0.782167      0.497598  0.368674   0.164682  
+
+Selected algorithm family by mean CV PR-AUC: XGBoost
+
+CHUNK 2: Tuning XGBoost using development-only scaffold-grouped CV ...
+
+Selected XGBoost parameters:
+{
+  "subsample": 0.8,
+  "reg_lambda": 2.0,
+  "reg_alpha": 0.5,
+  "n_estimators": 700,
+  "min_child_weight": 4,
+  "max_depth": 6,
+  "learning_rate": 0.01,
+  "gamma": 0.3,
+  "colsample_bytree": 1.0
+}
+Best mean scaffold-CV average precision: 0.509504
+
+Selecting and freezing top descriptors ...
+
+Frozen descriptor count: 60
+
+MULTICOLLINEARITY ASSESSMENT
+VIF was calculated on the frozen development descriptors after median imputation and scaling.
+Features with VIF >= 5.0:  50
+Features with VIF >= 10.0:  42
+Infinite VIF values: 0
+                Feature  R_squared            VIF                VIF_Status  \
+0                 MolWt   0.999997  388232.669702  Severe multicollinearity   
+1        HeavyAtomMolWt   0.999997  322448.297170  Severe multicollinearity   
+2        HeavyAtomCount   0.999988   84447.611141  Severe multicollinearity   
+3                  Chi1   0.999960   25294.745462  Severe multicollinearity   
+4   NumValenceElectrons   0.999960   24951.272630  Severe multicollinearity   
+5                  Chi0   0.999959   24504.541370  Severe multicollinearity   
+6                 Chi0v   0.999776    4467.041185  Severe multicollinearity   
+7                Kappa1   0.999754    4067.670993  Severe multicollinearity   
+8               NOCount   0.998602     715.123743  Severe multicollinearity   
+9        NumHeteroatoms   0.998246     570.012262  Severe multicollinearity   
+10                Chi1v   0.998167     545.694057  Severe multicollinearity   
+11                 TPSA   0.997573     411.992884  Severe multicollinearity   
+12                Chi2n   0.997527     404.310298  Severe multicollinearity   
+13                Chi3n   0.995542     224.334746  Severe multicollinearity   
+14        HallKierAlpha   0.995402     217.508695  Severe multicollinearity   
+15     MaxPartialCharge   0.994851     194.196228  Severe multicollinearity   
+16  MinAbsPartialCharge   0.993117     145.282993  Severe multicollinearity   
+17  MaxAbsPartialCharge   0.992585     134.860492  Severe multicollinearity   
+18                Chi2v   0.992034     125.539091  Severe multicollinearity   
+19     MinPartialCharge   0.991293     114.849423  Severe multicollinearity   
+
+    Development_N  Auxiliary_Predictor_Count  
+0            2168                         59  
+1            2168                         59  
+2            2168                         59  
+3            2168                         59  
+4            2168                         59  
+5            2168                         59  
+6            2168                         59  
+7            2168                         59  
+8            2168                         59  
+9            2168                         59  
+10           2168                         59  
+11           2168                         59  
+12           2168                         59  
+13           2168                         59  
+14           2168                         59  
+15           2168                         59  
+16           2168                         59  
+17           2168                         59  
+18           2168                         59  
+19           2168                         59  
+
+Generating weighted XGBoost development OOF predictions ...
+
+Frozen threshold: 0.56
+Development OOF performance:
+   Accuracy  BalancedAccuracy  Precision_toxic  Recall_toxic  \
+0  0.850554          0.734056         0.598901      0.550505   
+
+   Specificity_non_toxic  F1_toxic       MCC     Brier   ROC_AUC    PR_AUC  \
+0               0.917607  0.573684  0.483905  0.113891  0.842545  0.617836   
+
+   True_GO  False_NO_GO  False_GO  True_NO_GO  GO_Precision  GO_Recall  \
+0     1626          146       178         218       0.90133   0.917607   
+
+   NO_GO_Precision  NO_GO_Recall  
+0         0.598901      0.550505  
+
+Comparing scale_pos_weight, SMOTE, and ADASYN using scaffold-grouped OOF predictions ...
+
+Development OOF imbalance comparison:
+             Method  Recall_toxic  F1_toxic    PR_AUC  Precision_toxic  \
+0  scale_pos_weight      0.550505  0.573684  0.617836         0.598901   
+1             SMOTE      0.477273  0.541547  0.607454         0.625828   
+2            ADASYN      0.477273  0.537696  0.596493         0.615635   
+
+   BalancedAccuracy       MCC   ROC_AUC  Accuracy  Threshold  
+0          0.734056  0.483905  0.842545  0.850554       0.56  
+1          0.706751  0.461423  0.842522  0.852399       0.56  
+2          0.705341  0.455137  0.842435  0.850092       0.56  
+
+Frozen configuration saved to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/frozen_model_configuration.json
+
+DEVELOPMENT COMPLETE.
+The locked scaffold test was not evaluated.
+Archive the output directory.
+Then change only RUN_MODE to 'final_test' and rerun.
+
+========================================================================
+Workflow console log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_development.log
+Structured workflow event log exported to:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/workflow_events_development.csv
+Data-cleaning removal log:
+/content/drive/MyDrive/ChemEng/results_scaffold_locked_qsar_vif_smote_adasyn/data_cleaning_removal_log.csv
+Finished (UTC): 2026-07-23T23:42:03.991811+00:00
+========================================================================
