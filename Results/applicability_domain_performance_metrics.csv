@@ -1,4 +1,0 @@
-Applicability_domain,Total_N,Nontoxic_N,Toxic_N,TN,FP,FN,TP,Accuracy,Balanced_accuracy,Toxic_precision,Toxic_recall,Toxic_F1,Specificity,MCC,ROC_AUC,PR_AUC,Brier_score
-All locked-test compounds,530,436,94,398,38,40,54,0.853,0.744,0.587,0.574,0.581,0.913,0.491,0.882,0.657,0.106
-Inside applicability domain,488,397,91,359,38,39,52,0.842,0.738,0.578,0.571,0.575,0.904,0.478,0.875,0.656,0.113
-Outside applicability domain,42,39,3,39,0,1,2,0.976,0.833,1.0,0.667,0.8,1.0,0.806,0.991,0.917,0.03
