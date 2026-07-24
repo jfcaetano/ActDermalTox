@@ -14,7 +14,7 @@ Koutroumpa, N.M. (2025). Dataset ds13 - Acute dermal toxicity of small molecules
 ## Scripts
 Execute in Google Collab in the folliwng order:
 
-# Scaffold-Locked QSAR Toxicity Workflow
+# Main Model Workflow
 
 An end-to-end Google Colab workflow for building and validating binary toxicity classification models from molecular structures.
 
